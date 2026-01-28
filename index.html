@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madyson Houseman - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+```
+    body {
+        font-family: 'Inter', sans-serif;
+        background: #fafaf9;
+        color: #1a1a1a;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    /* Home Page */
+    #home {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background-image: url('https://i.imgur.com/lkFT6bK.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+        background-color: #fafaf9;
+    }
+
+    /* Mobile-only header */
+    .mobile-header-image {
+        display: none;
+    }
+
+    @media only screen and (max-width: 430px) {
+        #home {
+            background-image: none;
+            background-color: #fafaf9;
+        }
+
+        .mobile-header-image {
+            display: block;
+            width: 100%;
+            height: auto;
+            margin-bottom: 40px;
+        }
+
+        .mobile-header-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .widgets-container {
+            flex: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 30px;
+            margin-top: 0;
+            padding: 0 20px 60px 20px;
+        }
+
+        .widget.work-widget,
+        .widget.about-widget {
+            max-width: 240px;
+            transform: none;
+            position: static;
+            left: 0;
+            top: 0;
+        }
+
+        .widget.work-widget:hover,
+        .widget.about-widget:hover {
+            transform: translateY(-10px);
+        }
+
+        .widget img {
+            max-width: 100%;
+        }
+    }
+
+    .widgets-container {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        padding: 0 0 80px 0;
+        position: relative;
+        margin-top: 200px;
+    }
+
+    .widget {
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .widget:hover {
+        transform: translateY(-15px);
+        filter: brightness(1.05);
+    }
+
+    .widget:active {
+        transform: translateY(-10px) scale(0.98);
+    }
+
+    .widget img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .widget.work-widget {
+        max-width: 500px;
+        transform: rotate(-8deg);
+        position: relative;
+        left: -20px;
+    }
+
+    .widget.work-widget:hover {
+        transform: rotate(-8deg) translateY(-15px);
+    }
+
+    .widget.about-widget {
+        max-width: 240px;
+        position: relative;
+        top: 20px;
+        left: -50px;
+        z-index: 2;
+        transform: rotate(5deg);
+    }
+
+    .widget.about-widget:hover {
+        transform: rotate(5deg) translateY(-15px);
+    }
+
+    /* Footer */
+    .footer {
+        width: 100%;
+        padding: 40px 40px;
+        background: rgba(250, 250, 249, 0.97);
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .footer-content {
+        max-width: 1000px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 40px;
+    }
+
+    .footer-section {
+        text-align: center;
+    }
+
+    .footer-title {
+        font-size: 0.85rem;
+        color: #1a1a1a;
+        font-weight: 500;
+        margin-bottom: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: opacity 0.3s, color 0.3s;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .footer-title:hover {
+        opacity: 0.6;
+    }
+
+    /* Modal */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(26, 26, 26, 0.75);
+        justify-content: center;
+        align-items: center;
+        backdrop-filter: blur(4px);
+        overflow-y: auto;
+    }
+
+    .modal.active {
+        display: flex;
+    }
+
+    .modal-content {
+        background: white;
+        padding: 80px 60px;
+        border-radius: 0;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        box-shadow: none;
+        overflow-y: auto;
+    }
+
+    .close-btn {
+        position: fixed;
+        top: 30px;
+        right: 40px;
+        font-size: 2.5rem;
+        color: #999;
+        cursor: pointer;
+        border: none;
+        background: none;
+        transition: color 0.3s;
+        font-weight: 300;
+        z-index: 1001;
+    }
+
+    .close-btn:hover {
+        color: #1a1a1a;
+    }
+
+    .modal-title {
+        font-size: 4rem;
+        color: #1a1a1a;
+        margin-bottom: 50px;
+        font-weight: 500;
+        font-family: 'Montserrat', sans-serif;
+        letter-spacing: -1.5px;
+        text-align: center;
+    }
+
+    .modal-text {
+        font-size: 1.25rem;
+        color: #4a4a4a;
+        line-height: 2;
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .modal-link {
+        color: #1a1a1a;
+        text-decoration: none;
+        transition: opacity 0.3s;
+        border-bottom: 1px solid #1a1a1a;
+        padding-bottom: 2px;
+    }
+
+    .modal-link:hover {
+        opacity: 0.6;
+    }
+
+    .social-item {
+        margin-bottom: 20px;
+    }
+
+    .social-platform {
+        font-weight: 500;
+        color: #1a1a1a;
+        letter-spacing: 0.5px;
+    }
+
+    /* Pages */
+    .page {
+        display: none;
+        min-height: 100vh;
+        padding: 30px 20px;
+        background: #fafaf9;
+    }
+
+    .page.active {
+        display: block;
+    }
+
+    .back-button {
+        background: transparent;
+        color: #1a1a1a;
+        border: 1px solid #1a1a1a;
+        padding: 12px 28px;
+        font-size: 0.85rem;
+        cursor: pointer;
+        border-radius: 0;
+        margin-bottom: 40px;
+        transition: all 0.3s;
+        font-family: 'Inter', sans-serif;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-weight: 500;
+    }
+
+    .back-button:hover {
+        background: #1a1a1a;
+        color: white;
+    }
+
+    .page-title {
+        font-size: 5rem;
+        color: #1a1a1a;
+        margin-bottom: 60px;
+        text-align: center;
+        font-weight: 500;
+        font-family: 'Montserrat', sans-serif;
+        letter-spacing: -2px;
+    }
+
+    /* About Me */
+    .about-content {
+        max-width: 800px;
+        margin: 0 auto;
+        font-size: 1.25rem;
+        line-height: 2;
+        color: #4a4a4a;
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+    }
+
+    /* Work Grid */
+    .work-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .work-widgets-image {
+        max-width: 1000px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .work-widgets-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .work-box {
+        cursor: pointer;
+        border: none;
+        display: block;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        margin: 0;
+        padding: 0;
+    }
+
+    .work-box:hover {
+        transform: translateY(-8px);
+    }
+
+    .work-box img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .work-item {
+        display: block;
+    }
+
+    .work-box h3 {
+        display: none;
+    }
+
+    .work-box p {
+        display: none;
+    }
+
+    /* Project Detail Pages */
+    .subsection-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+        max-width: 1000px;
+        margin: 40px auto;
+    }
+
+    .subsection-box {
+        background: #1a1a1a;
+        color: white;
+        padding: 60px 30px;
+        text-align: center;
+        font-size: 1.4rem;
+        border-radius: 0;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        font-weight: 500;
+        font-family: 'Inter', sans-serif;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        border: 1px solid #1a1a1a;
+    }
+
+    .subsection-box:hover {
+        transform: scale(1.02);
+        background: white;
+        color: #1a1a1a;
+    }
+
+    .role-description {
+        text-align: center;
+        font-size: 1.4rem;
+        color: #4a4a4a;
+        margin-top: 30px;
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+    }
+
+    /* Archive Role Detail Pages */
+    .role-detail {
+        max-width: 900px;
+        margin: 60px auto;
+        background: white;
+        padding: 60px 70px;
+        border-radius: 0;
+        box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .role-detail h3 {
+        font-size: 2.8rem;
+        color: #1a1a1a;
+        margin-bottom: 25px;
+        font-weight: 500;
+        font-family: 'Montserrat', sans-serif;
+        letter-spacing: -1px;
+    }
+
+    .role-detail p {
+        font-size: 1.15rem;
+        line-height: 1.9;
+        color: #4a4a4a;
+        margin-bottom: 40px;
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+    }
+
+    /* Dropdown/Accordion */
+    .dropdown-section {
+        margin-top: 40px;
+        border-top: 1px solid rgba(0,0,0,0.1);
+        padding-top: 30px;
+    }
+
+    .dropdown-header {
+        background: #1a1a1a;
+        color: white;
+        padding: 18px 30px;
+        font-size: 1.1rem;
+        font-weight: 500;
+        cursor: pointer;
+        border-radius: 0;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: 'Inter', sans-serif;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    .dropdown-header:hover {
+        background: #2a2a2a;
+    }
+
+    .dropdown-arrow {
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        font-size: 1.3rem;
+    }
+
+    .dropdown-arrow.open {
+        transform: rotate(180deg);
+    }
+
+    .dropdown-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .dropdown-content.open {
+        max-height: 3000px;
+    }
+
+    .dropdown-inner {
+        padding: 40px 30px;
+    }
+
+    .media-subsection {
+        margin-bottom: 50px;
+    }
+
+    .media-subsection h4 {
+        font-size: 1.6rem;
+        color: #1a1a1a;
+        margin-bottom: 25px;
+        font-weight: 500;
+        font-family: 'Montserrat', sans-serif;
+        letter-spacing: -0.5px;
+    }
+
+    .social-media-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+    }
+
+    .social-media-grid img {
+        width: 100%;
+        height: auto;
+        border-radius: 0;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .social-media-grid img:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+
+    /* Work Page Auto-Scrolling Carousel */
+    .work-carousel-wrapper {
+        width: 100%;
+        overflow: hidden;
+        margin: 30px 0 60px 0;
+        background: white;
+        padding: 30px 0;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        border-top: 1px solid rgba(0,0,0,0.05);
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .work-carousel-track {
+        display: flex;
+        gap: 20px;
+        animation: scroll-left 40s linear infinite;
+        width: fit-content;
+    }
+
+    .work-carousel-track:hover {
+        animation-play-state: paused;
+    }
+
+    .work-carousel-image {
+        height: 200px;
+        width: auto;
+        object-fit: contain;
+        border-radius: 0;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    @keyframes scroll-left {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    /* Anteros Header Box */
+    .anteros-header-box {
+        background: #ff3b30;
+        color: white;
+        padding: 40px;
+        text-align: center;
+        font-size: 2.5rem;
+        border-radius: 8px;
+        margin: 0 auto 40px auto;
+        max-width: 1000px;
+        font-weight: 600;
+    }
+
+    /* Anteros Page - Vertical Scroll Layout */
+    #anteros {
+        padding: 40px 0;
+    }
+
+    #anteros .back-button {
+        margin: 0 40px 40px 40px;
+    }
+
+    .anteros-hero {
+        text-align: center;
+        padding: 100px 40px 80px 40px;
+        background: white;
+    }
+
+    .anteros-main-title {
+        font-size: 6rem;
+        font-weight: 500;
+        color: #1a1a1a;
+        letter-spacing: -3px;
+        margin-bottom: 25px;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .anteros-subtitle {
+        font-size: 1.1rem;
+        font-weight: 400;
+        color: #666;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .anteros-website-link {
+        display: inline-block;
+        margin-top: 20px;
+        font-size: 1rem;
+        color: #1a1a1a;
+        text-decoration: none;
+        font-family: 'Inter', sans-serif;
+        border-bottom: 1px solid #1a1a1a;
+        padding-bottom: 2px;
+        transition: opacity 0.3s;
+    }
+
+    .anteros-website-link:hover {
+        opacity: 0.6;
+    }
+
+    .anteros-carousel-section {
+        padding: 80px 0;
+        background: #f9f9f8;
+    }
+
+    /* Anteros Content Section */
+    .anteros-content-section {
+        width: 100%;
+        padding: 100px 40px;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .anteros-body-text {
+        font-size: 1.3rem;
+        line-height: 2;
+        color: #4a4a4a;
+        font-weight: 400;
+        font-family: 'Inter', sans-serif;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    /* Anteros Horizontal Sections */
+    .anteros-horizontal-sections {
+        width: 100%;
+        padding: 80px 40px;
+        background: white;
+    }
+
+    .horizontal-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .horizontal-item {
+        text-align: center;
+    }
+
+    .horizontal-title {
+        font-size: 1.8rem;
+        font-weight: 500;
+        color: #1a1a1a;
+        margin-bottom: 25px;
+        font-family: 'Montserrat', sans-serif;
+        letter-spacing: -0.5px;
+    }
+
+    .horizontal-image {
+        width: 100%;
+        height: auto;
+        display: block;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+    }
+
+    .horizontal-image:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+
+    /* Anteros Sections */
+    .anteros-section {
+        width: 100%;
+        min-height: 100vh;
+        padding: 120px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .launches-section {
+        background: white;
+    }
+
+    .social-section {
+        background: #fafaf9;
+    }
+
+    .events-section {
+        background: white;
+    }
+
+    .section-content {
+        max-width: 900px;
+        width: 100%;
+    }
+
+    .section-title {
+        font-size: 4.5rem;
+        font-weight: 500;
+        color: #1a1a1a;
+        margin-bottom: 35px;
+        letter-spacing: -2px;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .section-divider {
+        width: 100px;
+        height: 1px;
+        background: #1a1a1a;
+        margin-bottom: 45px;
+    }
+
+    .section-description {
+        font-size: 1.3rem;
+        line-height: 2;
+        color: #4a4a4a;
+        font-weight: 400;
+        margin-bottom: 70px;
+        max-width: 700px;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .content-spacer {
+        height: 70px;
+    }
+
+    .content-placeholder {
+        padding: 100px 50px;
+        background: #f9f9f8;
+        border-radius: 0;
+        text-align: center;
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .content-placeholder p {
+        font-size: 1.1rem;
+        color: #999;
+        font-style: italic;
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+    }
+
+    /* Carousel */
+    .carousel-container {
+        max-width: 1000px;
+        margin: 0 auto 50px auto;
+        position: relative;
+        overflow: hidden;
+        max-height: 70vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .carousel-slides {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        height: 100%;
+        align-items: center;
+    }
+
+    .carousel-slide {
+        min-width: 100%;
+        max-height: 70vh;
+        width: 100%;
+        object-fit: contain;
+        display: block;
+    }
+
+    .carousel-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(26, 26, 26, 0.7);
+        color: white;
+        border: none;
+        padding: 18px 22px;
+        font-size: 1.3rem;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 10;
+        border-radius: 0;
+    }
+
+    .carousel-nav:hover {
+        background: rgba(26, 26, 26, 0.95);
+    }
+
+    .carousel-nav.prev {
+        left: 10px;
+    }
+
+    .carousel-nav.next {
+        right: 10px;
+    }
+
+    .carousel-dots {
+        text-align: center;
+        padding: 25px 0;
+    }
+
+    .carousel-dot {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #d4d4d4;
+        margin: 0 6px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .carousel-dot.active {
+        background: #1a1a1a;
+        transform: scale(1.3);
+    }
+
+    @media (max-width: 768px) {
+        .widgets-container {
+            flex-direction: column;
+            gap: 30px;
+            margin-top: 100px;
+            padding: 0 20px 60px 20px;
+        }
+
+        .widget img {
+            max-width: 300px;
+        }
+        
+        .work-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .subsection-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+        }
+
+        .footer-content {
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .footer {
+            padding: 30px 20px;
+        }
+
+        .social-media-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .carousel-slide {
+            max-height: 60vh;
+        }
+
+        .anteros-header-box {
+            font-size: 1.8rem;
+            padding: 30px 20px;
+        }
+
+        .work-carousel-image {
+            height: 150px;
+        }
+
+        .anteros-main-title {
+            font-size: 3rem;
+            letter-spacing: -1.5px;
+        }
+
+        .anteros-subtitle {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            letter-spacing: -1px;
+        }
+
+        .section-description {
+            font-size: 1.15rem;
+        }
+
+        .anteros-section {
+            padding: 70px 20px;
+            min-height: auto;
+        }
+
+        .anteros-hero {
+            padding: 70px 20px 50px 20px;
+        }
+
+        .anteros-carousel-section {
+            padding: 50px 0;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            letter-spacing: -1px;
+        }
+
+        .horizontal-grid {
+            grid-template-columns: 1fr;
+            gap: 50px;
+        }
+
+        .horizontal-title {
+            font-size: 1.5rem;
+        }
+
+        .modal-content {
+            padding: 60px 30px;
+        }
+
+        .modal-title {
+            font-size: 2.5rem;
+        }
+
+        .modal-text {
+            font-size: 1rem;
+        }
+    }
+</style>
+```
+
+</head>
+<body>
+    <!-- HOME PAGE -->
+    <div id="home">
+        <!-- Mobile-only Header Image -->
+        <div class="mobile-header-image">
+            <img src="https://i.imgur.com/SdWldly.png" alt="">
+        </div>
+
+```
+    <div class="widgets-container">
+        <div class="widget work-widget" onclick="navigate('work')">
+            <img src="https://i.imgur.com/d4epqdb.png" alt="My Work">
+        </div>
+        <div class="widget about-widget" onclick="navigate('about')">
+            <img src="https://i.imgur.com/Ux6DKxL.png" alt="About Me">
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-title" onclick="openModal('contact')">CONTACT</div>
+            </div>
+            <div class="footer-section">
+                <div class="footer-title" onclick="openModal('social')">SOCIAL MEDIA</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Modal -->
+<div id="contactModal" class="modal" onclick="closeModal('contact')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <button class="close-btn" onclick="closeModal('contact')">&times;</button>
+        <h2 class="modal-title">Contact</h2>
+        <div class="modal-text">
+            <p><a href="mailto:oliviasalazarhudgins@outlook.com" class="modal-link">oliviasalazarhudgins@outlook.com</a></p>
+        </div>
+    </div>
+</div>
+
+<!-- Social Media Modal -->
+<div id="socialModal" class="modal" onclick="closeModal('social')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <button class="close-btn" onclick="closeModal('social')">&times;</button>
+        <h2 class="modal-title">Social Media</h2>
+        <div class="modal-text">
+            <div class="social-item">
+                <span class="social-platform">TikTok:</span> 
+                <a href="https://www.tiktok.com/@looxbyliv" target="_blank" class="modal-link">@looxbyliv</a>
+            </div>
+            <div class="social-item">
+                <span class="social-platform">Instagram:</span> 
+                <a href="https://www.instagram.com/oliviasalazzar" target="_blank" class="modal-link">@oliviasalazzar</a>
+            </div>
+            <div class="social-item">
+                <span class="social-platform">LinkedIn:</span> 
+                <a href="https://www.linkedin.com/in/oliviasalazarhudgins" target="_blank" class="modal-link">Olivia Salazar-Hudgins</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABOUT ME PAGE -->
+<div id="about" class="page">
+    <button class="back-button" onclick="navigate('home')">← Back to Home</button>
+    <h2 class="page-title">About Me</h2>
+    <div class="about-content">
+        <p>I'm a creative professional specializing in social media management, content creation, and creative direction. With experience across fashion, events, and digital platforms, I bring brands to life through compelling visual storytelling and strategic content.</p>
+        <br><br>
+        <p>My work spans from organizing fashion shows to managing social media campaigns, always with a focus on authenticity and engagement.</p>
+    </div>
+</div>
+
+<!-- MY WORK PAGE -->
+<div id="work" class="page">
+    <button class="back-button" onclick="navigate('home')">← Back to Home</button>
+    <h2 class="page-title">My Work</h2>
+    
+    <!-- Anteros Auto-Scrolling Carousel -->
+    <div class="work-carousel-wrapper">
+        <div class="work-carousel-track" id="workCarouselTrack">
+            <img src="https://i.imgur.com/CeKMJfF.jpeg" alt="Anteros 1" class="work-carousel-image">
+            <img src="https://i.imgur.com/l7pO8pV.jpeg" alt="Anteros 2" class="work-carousel-image">
+            <img src="https://i.imgur.com/lBdXCL3.jpeg" alt="Anteros 3" class="work-carousel-image">
+            <img src="https://i.imgur.com/gxk7RUa.jpeg" alt="Anteros 4" class="work-carousel-image">
+            <img src="https://i.imgur.com/K2ZUwau.jpeg" alt="Anteros 5" class="work-carousel-image">
+            <img src="https://i.imgur.com/i0UbvD9.jpeg" alt="Anteros 6" class="work-carousel-image">
+            <img src="https://i.imgur.com/aoxUSu9.jpeg" alt="Work 7" class="work-carousel-image">
+            <img src="https://i.imgur.com/2Se0bjJ.jpeg" alt="Work 8" class="work-carousel-image">
+            <img src="https://i.imgur.com/ACwX4pP.jpeg" alt="Work 9" class="work-carousel-image">
+            <img src="https://i.imgur.com/0Y2hrqo.jpeg" alt="Work 10" class="work-carousel-image">
+            <img src="https://i.imgur.com/xCi961J.jpeg" alt="Work 11" class="work-carousel-image">
+            <!-- Duplicate images for seamless loop -->
+            <img src="https://i.imgur.com/CeKMJfF.jpeg" alt="Anteros 1" class="work-carousel-image">
+            <img src="https://i.imgur.com/l7pO8pV.jpeg" alt="Anteros 2" class="work-carousel-image">
+            <img src="https://i.imgur.com/lBdXCL3.jpeg" alt="Anteros 3" class="work-carousel-image">
+            <img src="https://i.imgur.com/gxk7RUa.jpeg" alt="Anteros 4" class="work-carousel-image">
+            <img src="https://i.imgur.com/K2ZUwau.jpeg" alt="Anteros 5" class="work-carousel-image">
+            <img src="https://i.imgur.com/i0UbvD9.jpeg" alt="Anteros 6" class="work-carousel-image">
+            <img src="https://i.imgur.com/aoxUSu9.jpeg" alt="Work 7" class="work-carousel-image">
+            <img src="https://i.imgur.com/2Se0bjJ.jpeg" alt="Work 8" class="work-carousel-image">
+            <img src="https://i.imgur.com/ACwX4pP.jpeg" alt="Work 9" class="work-carousel-image">
+            <img src="https://i.imgur.com/0Y2hrqo.jpeg" alt="Work 10" class="work-carousel-image">
+            <img src="https://i.imgur.com/xCi961J.jpeg" alt="Work 11" class="work-carousel-image">
+        </div>
+    </div>
+    
+    <div class="work-grid">
+        <div class="work-item">
+            <div class="work-box" onclick="navigate('anteros')">
+                <img src="https://i.imgur.com/2vVGnTQ.png" alt="The Anteros">
+            </div>
+        </div>
+
+        <div class="work-item">
+            <div class="work-box" onclick="navigate('archive')">
+                <img src="https://i.imgur.com/PcBCMTd.png" alt="The Archive Fashion Show">
+            </div>
+        </div>
+
+        <div class="work-item">
+            <div class="work-box" onclick="navigate('rue')">
+                <img src="https://i.imgur.com/DCEulLC.png" alt="Rue à Vous">
+            </div>
+        </div>
+
+        <div class="work-item">
+            <div class="work-box" onclick="navigate('themall')">
+                <img src="https://i.imgur.com/zUdBsCa.png" alt="themall.app">
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer on Work Page -->
+    <div class="footer" style="margin-top: 40px;">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-title" onclick="openModal('contact')">CONTACT</div>
+            </div>
+            <div class="footer-section">
+                <div class="footer-title" onclick="openModal('social')">SOCIAL MEDIA</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- THE ANTEROS PROJECT -->
+<div id="anteros" class="page">
+    <button class="back-button" onclick="navigate('work')">← Back to My Work</button>
+    
+    <!-- Hero Section -->
+    <div class="anteros-hero">
+        <h1 class="anteros-main-title">The Anteros</h1>
+        <p class="anteros-subtitle">Editorial Production · Social Media · Events</p>
+        <a href="https://www.theanteros.com" target="_blank" class="anteros-website-link">www.theanteros.com</a>
+    </div>
+
+    <!-- Auto-Scrolling Carousel -->
+    <div class="anteros-carousel-section">
+        <div class="carousel-container">
+            <div class="carousel-slides" id="anterosCarousel">
+                <img src="https://i.imgur.com/CeKMJfF.jpeg" alt="Anteros 1" class="carousel-slide">
+                <img src="https://i.imgur.com/l7pO8pV.jpeg" alt="Anteros 2" class="carousel-slide">
+                <img src="https://i.imgur.com/lBdXCL3.jpeg" alt="Anteros 3" class="carousel-slide">
+                <img src="https://i.imgur.com/gxk7RUa.jpeg" alt="Anteros 4" class="carousel-slide">
+                <img src="https://i.imgur.com/K2ZUwau.jpeg" alt="Anteros 5" class="carousel-slide">
+                <img src="https://i.imgur.com/i0UbvD9.jpeg" alt="Anteros 6" class="carousel-slide">
+            </div>
+            <button class="carousel-nav prev" onclick="moveCarousel(-1)">&#10094;</button>
+            <button class="carousel-nav next" onclick="moveCarousel(1)">&#10095;</button>
+        </div>
+        <div class="carousel-dots" id="carouselDots"></div>
+    </div>
+    
+    <!-- Job Description Section -->
+    <section class="anteros-content-section">
+        <div class="section-content">
+            <div class="dropdown-section">
+                <div class="dropdown-header" onclick="toggleDropdown('jobDescription')">
+                    <span>More about job description...</span>
+                    <span class="dropdown-arrow" id="jobDescriptionArrow">▼</span>
+                </div>
+                <div class="dropdown-content" id="jobDescriptionContent">
+                    <div class="dropdown-inner">
+                        <p class="anteros-body-text">Contributed to brand storytelling and creative execution at Anteros across editorial production, social media, and experiential activations. Supported seasonal launches and ongoing content by shaping visual narratives, coordinating assets, and translating brand identity across digital and physical platforms. Experience includes campaign launches, editorial content development, and event support across New York, Los Angeles, and GOOP Marin, with a focus on cohesive storytelling and elevated brand presentation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Horizontal Sections Grid -->
+    <section class="anteros-horizontal-sections">
+        <div class="horizontal-grid">
+            <!-- Chapter III Launch -->
+            <div class="horizontal-item">
+                <h3 class="horizontal-title">Chapter III Launch</h3>
+                <img src="https://i.imgur.com/2Ixd2YS.jpeg" alt="Chapter III Launch" class="horizontal-image" onclick="openAnterosModal('launch')">
+            </div>
+
+            <!-- Social Media -->
+            <div class="horizontal-item">
+                <h3 class="horizontal-title">Social Media</h3>
+                <img src="https://i.imgur.com/aLGTh4z.jpeg" alt="Social Media" class="horizontal-image" onclick="openAnterosModal('social')">
+            </div>
+
+            <!-- Events -->
+            <div class="horizontal-item">
+                <h3 class="horizontal-title">Events</h3>
+                <img src="https://i.imgur.com/R82QC1H.jpeg" alt="Events" class="horizontal-image" onclick="openAnterosModal('events')">
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Anteros Modals -->
+<div id="anterosLaunchModal" class="modal" onclick="closeAnterosModal('launch')">
+    <div class="modal-content" onclick="event.stopPropagation()" style="max-width: 1000px; margin: 0 auto; padding: 60px 40px;">
+        <button class="close-btn" onclick="closeAnterosModal('launch')">&times;</button>
+        <h2 class="modal-title" style="font-size: 3rem;">Chapter III Launch</h2>
+        <div class="modal-text">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-bottom: 50px;">
+                <div>
+                    <img src="https://i.imgur.com/ZYvTTC5.jpeg" alt="Chapter III Launch" style="width: 100%; height: auto; box-shadow: 0 4px 16px rgba(0,0,0,0.08); object-fit: cover; max-height: 400px;">
+                </div>
+                <div>
+                    <p>Anteros Chapter III expanded the brand's assortment with additional styles, new colorways, and the introduction of merino wool. Supported the launch through hands-on involvement in design and pattern discussions, contributing to decision-making around silhouettes, materials, and production considerations. Worked closely with the Creative Director and Founder to coordinate shoot-day logistics, prepare styling documents, lookbooks, and mood boards, and served as a production assistant on set for both editorial and e-commerce shoots. Ensured schedules, assets, and on-set needs were executed efficiently to support a smooth production workflow from pre-production through final capture.</p>
+                </div>
+            </div>
+            
+            <!-- Slideshow -->
+            <div style="max-width: 600px; margin: 0 auto;">
+                <div class="carousel-container" style="max-height: 400px;">
+                    <div class="carousel-slides" id="chapterThreeCarousel" style="display: flex; transition: transform 0.5s ease-in-out;">
+                        <img src="https://i.imgur.com/QJZhmL7.jpeg" alt="Chapter III 1" style="min-width: 100%; max-height: 400px; object-fit: contain;">
+                        <img src="https://i.imgur.com/JW3nsSa.jpeg" alt="Chapter III 2" style="min-width: 100%; max-height: 400px; object-fit: contain;">
+                        <img src="https://i.imgur.com/ACXulwx.jpeg" alt="Chapter III 3" style="min-width: 100%; max-height: 400px; object-fit: contain;">
+                        <img src="https://i.imgur.com/IlZ0rBD.jpeg" alt="Chapter III 4" style="min-width: 100%; max-height: 400px; object-fit: contain;">
+                        <img src="https://i.imgur.com/IqMUwFG.jpeg" alt="Chapter III 5" style="min-width: 100%; max-height: 400px; object-fit: contain;">
+                        <img src="https://i.imgur.com/dHsa8Dd.jpeg" alt="Chapter III 6" style="min-width: 100%; max-height: 400px; object-fit: contain;">
+                        <img src="https://i.imgur.com/9iRMnbm.jpeg" alt="Chapter III 7" style="min-width: 100%; max-height: 400px; object-fit: contain;">
+                    </div>
+                    <button class="carousel-nav prev" onclick="moveChapterThreeCarousel(-1)" style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">&#10094;</button>
+                    <button class="carousel-nav next" onclick="moveChapterThreeCarousel(1)" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%);">&#10095;</button>
+                </div>
+                <div class="carousel-dots" id="chapterThreeDots" style="text-align: center; padding: 20px 0;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="anterosSocialModal" class="modal" onclick="closeAnterosModal('social')">
+    <div class="modal-content" onclick="event.stopPropagation()" style="max-width: 1000px; margin: 0 auto; padding: 60px 40px;">
+        <button class="close-btn" onclick="closeAnterosModal('social')">&times;</button>
+        <h2 class="modal-title" style="font-size: 3rem;">Social Media</h2>
+        <div class="modal-text">
+            <div class="social-item">
+                <span class="social-platform">TikTok:</span> 
+                <a href="https://www.tiktok.com/@the.anteros" target="_blank" class="modal-link">@the.anteros</a>
+            </div>
+            <div class="social-item">
+                <span class="social-platform">Instagram:</span> 
+                <a href="https://www.instagram.com/the.anteros" target="_blank" class="modal-link">@the.anteros</a>
+            </div>
+            <div class="social-item">
+                <span class="social-platform">Pinterest:</span> 
+                <a href="https://www.pinterest.com/TheAnteros" target="_blank" class="modal-link">TheAnteros</a>
+            </div>
+            <div class="social-item">
+                <span class="social-platform">LinkedIn:</span> 
+                <a href="https://www.linkedin.com/company/the-anteros" target="_blank" class="modal-link">The Anteros</a>
+            </div>
+            
+            <div style="margin-top: 40px;">
+                <h3 style="font-size: 1.5rem; color: #1a1a1a; margin-bottom: 25px; font-weight: 500; font-family: 'Montserrat', sans-serif;">Content Gallery</h3>
+                <div class="social-media-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <img src="https://i.imgur.com/TWwaDsP.jpeg" alt="Anteros Content 1" style="width: 100%; height: auto;">
+                    <img src="https://i.imgur.com/ocMIOLi.jpeg" alt="Anteros Content 2" style="width: 100%; height: auto;">
+                    <img src="https://i.imgur.com/aYSGaJW.jpeg" alt="Anteros Content 3" style="width: 100%; height: auto;">
+                    <img src="https://i.imgur.com/9DgAonG.png" alt="Anteros Content 4" style="width: 100%; height: auto;">
+                    <img src="https://i.imgur.com/B9NJDRk.png" alt="Anteros Content 5" style="width: 100%; height: auto;">
+                    <img src="https://i.imgur.com/7htuDAQ.jpeg" alt="Anteros Content 6" style="width: 100%; height: auto;">
+                    <img src="https://i.imgur.com/itrajhe.png" alt="Anteros Content 7" style="width: 100%; height: auto;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="anterosEventsModal" class="modal" onclick="closeAnterosModal('events')">
+    <div class="modal-content" onclick="event.stopPropagation()" style="max-width: 1000px; margin: 0 auto; padding: 60px 40px;">
+        <button class="close-btn" onclick="closeAnterosModal('events')">&times;</button>
+        <h2 class="modal-title" style="font-size: 3rem;">Events</h2>
+        <div class="modal-text">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-bottom: 50px;">
+                <div>
+                    <p>Supported Anteros' event production across key markets, including New York Fashion Week, Los Angeles, and GOOP Marin. Assisted with pre-event coordination, on-site execution, and post-event content capture, ensuring brand presentation and logistics aligned with overall creative direction. Contributed to smooth event operations by supporting production needs, coordinating assets, and facilitating real-time execution across teams during live activations.</p>
+                </div>
+                <div>
+                    <img src="https://i.imgur.com/ACwX4pP.jpeg" alt="Events" style="width: 100%; height: auto; box-shadow: 0 4px 16px rgba(0,0,0,0.08); object-fit: cover; max-height: 400px;">
+                </div>
+            </div>
+            
+            <!-- Slideshow -->
+            <div style="max-width: 600px; margin: 0 auto;">
+                <div class="carousel-container" style="max-height: 400px;">
+                    <div class="carousel-slides" id="eventsCarousel" style="display: flex; transition: transform 0.5s ease-in-out;">
+                        <img src="https://i.imgur.com/0Y2hrqo.jpeg" alt="Events 1" style="min-width: 100%; max-height: 400px; object-fit: contain;">
+                        <img src="https://i.imgur.com/2Se0bjJ.jpeg" alt="Events 2" style="min-width: 100%; max-height: 400px; object-fit: contain;">
+                        <img src="https://i.imgur.com/aYQsP5A.jpeg" alt="Events 3" style="min-width: 100%; max-height: 400px; object-fit: contain;">
+                        <img src="https://i.imgur.com/70euHlT.jpeg" alt="Events 4" style="min-width: 100%; max-height: 400px; object-fit: contain;">
+                        <img src="https://i.imgur.com/Wtv8qS4.jpeg" alt="Events 5" style="min-width: 100%; max-height: 400px; object-fit: contain;">
+                        <img src="https://i.imgur.com/6BItgwl.jpeg" alt="Events 6" style="min-width: 100%; max-height: 400px; object-fit: contain;">
+                        <img src="https://i.imgur.com/Rbwnaqh.jpeg" alt="Events 7" style="min-width: 100%; max-height: 400px; object-fit: contain;">
+                        <img src="https://i.imgur.com/Wf1JBsc.jpeg" alt="Events 8" style="min-width: 100%; max-height: 400px; object-fit: contain;">
+                    </div>
+                    <button class="carousel-nav prev" onclick="moveEventsCarousel(-1)" style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">&#10094;</button>
+                    <button class="carousel-nav next" onclick="moveEventsCarousel(1)" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%);">&#10095;</button>
+                </div>
+                <div class="carousel-dots" id="eventsDots" style="text-align: center; padding: 20px 0;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- THE ARCHIVE FASHION SHOW -->
+<div id="archive" class="page">
+    <button class="back-button" onclick="navigate('work')">← Back to My Work</button>
+    <h2 class="page-title">The Archive — Fashion Show</h2>
+    
+    <!-- Role 1: Head of Media and Creative Direction -->
+    <div class="role-detail">
+        <h3>Head of Media and Creative Direction</h3>
+        <p>Led media strategy and promotional execution for The Archive, overseeing all outward-facing content and communications. Directed pre-show marketing, digital rollouts, and audience engagement across platforms, ensuring consistent messaging and visual cohesion. Managed editorial imagery, graphics, and content distribution to build anticipation and extend the show's reach beyond the runway. Developed the overarching creative vision for The Archive, a fashion show rooted in archival inspiration and narrative storytelling. Defined the conceptual framework, visual language, and experiential tone of the show, guiding everything from thematic direction to aesthetic execution. Curated the soundtrack, visual identity, and show atmosphere to create an immersive, concept-driven experience.</p>
+        
+        <div class="dropdown-section">
+            <div class="dropdown-header" onclick="toggleDropdown('digitalMedia')">
+                <span>Content and Imagery</span>
+                <span class="dropdown-arrow" id="digitalMediaArrow">▼</span>
+            </div>
+            <div class="dropdown-content" id="digitalMediaContent">
+                <div class="dropdown-inner">
+                    <div class="media-subsection">
+                        <h4>Social Media Content</h4>
+                        <div style="margin-bottom: 20px;">
+                            <span style="font-weight: 500; color: #1a1a1a; letter-spacing: 0.5px;">Instagram:</span> 
+                            <a href="https://www.instagram.com/saddlebackfashion" target="_blank" class="modal-link">@saddlebackfashion</a>
+                        </div>
+                        <div class="social-media-grid">
+                            <img src="https://i.imgur.com/4Jegb4o.png" alt="Social Media Content 1">
+                            <img src="https://i.imgur.com/ehzBxye.png" alt="Social Media Content 2">
+                            <img src="https://i.imgur.com/YjMTY3Y.png" alt="Social Media Content 3">
+                        </div>
+                        
+                        <h5 style="font-size: 1.3rem; color: #1a1a1a; margin-top: 40px; margin-bottom: 20px; font-weight: 500; font-family: 'Montserrat', sans-serif;">Instagram Stories</h5>
+                        <div class="social-media-grid" style="grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));">
+                            <img src="https://i.imgur.com/IFdjiD3.png" alt="Instagram Story 1" style="max-width: 50%;">
+                            <img src="https://i.imgur.com/2QroDbw.png" alt="Instagram Story 2" style="max-width: 50%;">
+                            <img src="https://i.imgur.com/DXqmH6x.png" alt="Instagram Story 4" style="max-width: 50%;">
+                            <img src="https://i.imgur.com/nsvzTKB.png" alt="Instagram Story 5" style="max-width: 50%;">
+                            <img src="https://i.imgur.com/YPqGUzj.jpeg" alt="Instagram Story 6" style="max-width: 50%;">
+                            <img src="https://i.imgur.com/drEZtpz.jpeg" alt="Instagram Story 7" style="max-width: 50%;">
+                        </div>
+                    </div>
+                    
+                    <div class="media-subsection">
+                        <h4>Designs</h4>
+                        <div class="social-media-grid">
+                            <img src="https://i.imgur.com/TTQZOyo.jpeg" alt="Design 1">
+                            <img src="https://i.imgur.com/AHaukrf.jpeg" alt="Design 2">
+                            <img src="https://i.imgur.com/IXsQR0g.jpeg" alt="Design 3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Role 2: Stage Manager -->
+    <div class="role-detail" style="margin-top: 80px;">
+        <h3>Stage Manager</h3>
+        <p>Served as the operational lead for backstage and technical communications, coordinating real-time messaging between sound, lighting, and production teams. Provided live execution support by managing cues, timing, and sequence continuity to ensure a seamless and consistent program flow. Collaborated closely with designers and production leads to maintain strategic alignment between creative direction and on-site execution throughout the show.</p>
+    </div>
+</div>
+
+<!-- RUE A VOUS -->
+<div id="rue" class="page">
+    <button class="back-button" onclick="navigate('work')">← Back to My Work</button>
+    <h2 class="page-title">Rue à Vous</h2>
+    
+    <div class="role-detail">
+        <h3>Creative Director</h3>
+        <p>Directing the visual identity, brand narrative, and creative strategy for Rue à Vous, a fine jewelry brand rooted in storytelling and timeless design. Currently overseeing concept development, aesthetic direction, and launch planning.</p>
+        <p>Work coming soon.</p>
+    </div>
+</div>
+
+<!-- THEMALL.APP -->
+<div id="themall" class="page">
+    <button class="back-button" onclick="navigate('work')">← Back to My Work</button>
+    <h2 class="page-title">themall.app</h2>
+    
+    <div class="role-detail">
+        <h3>Social Media Content Creator</h3>
+        <p>Developing social media content and visual storytelling for themall.app, supporting brand growth and digital presence through curated, platform-specific creative.</p>
+        <p>Work coming soon.</p>
+    </div>
+</div>
+
+<script>
+    // Click sound
+    function playClickSound() {
+        const audio = new Audio('data:audio/wav;base64,UklGRhIAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAfw==');
+        audio.volume = 0.3;
+        audio.play().catch(err => console.log('Audio play failed:', err));
+    }
+
+    function navigate(pageId) {
+        playClickSound();
+        document.getElementById('home').style.display = 'none';
+        
+        const pages = document.querySelectorAll('.page');
+        pages.forEach(page => page.classList.remove('active'));
+        
+        if (pageId === 'home') {
+            document.getElementById('home').style.display = 'flex';
+        } else {
+            document.getElementById(pageId).classList.add('active');
+        }
+        
+        window.scrollTo(0, 0);
+    }
+
+    function openModal(type) {
+        playClickSound();
+        if (type === 'contact') {
+            document.getElementById('contactModal').classList.add('active');
+        } else if (type === 'social') {
+            document.getElementById('socialModal').classList.add('active');
+        }
+    }
+
+    function closeModal(type) {
+        playClickSound();
+        if (type === 'contact') {
+            document.getElementById('contactModal').classList.remove('active');
+        } else if (type === 'social') {
+            document.getElementById('socialModal').classList.remove('active');
+        }
+    }
+
+    function toggleDropdown(id) {
+        playClickSound();
+        const content = document.getElementById(id + 'Content');
+        const arrow = document.getElementById(id + 'Arrow');
+        
+        content.classList.toggle('open');
+        arrow.classList.toggle('open');
+    }
+
+    function openAnterosModal(type) {
+        playClickSound();
+        if (type === 'launch') {
+            document.getElementById('anterosLaunchModal').classList.add('active');
+            setTimeout(() => initChapterThreeCarousel(), 100);
+        } else if (type === 'social') {
+            document.getElementById('anterosSocialModal').classList.add('active');
+        } else if (type === 'events') {
+            document.getElementById('anterosEventsModal').classList.add('active');
+            setTimeout(() => initEventsCarousel(), 100);
+        }
+    }
+
+    function closeAnterosModal(type) {
+        playClickSound();
+        if (type === 'launch') {
+            document.getElementById('anterosLaunchModal').classList.remove('active');
+        } else if (type === 'social') {
+            document.getElementById('anterosSocialModal').classList.remove('active');
+        } else if (type === 'events') {
+            document.getElementById('anterosEventsModal').classList.remove('active');
+        }
+    }
+
+    // Carousel functionality
+    let currentSlide = 0;
+    const totalSlides = 6;
+    let autoSlideInterval;
+
+    // Chapter Three Carousel
+    let chapterThreeSlide = 0;
+    const chapterThreeTotalSlides = 7;
+
+    // Events Carousel
+    let eventsSlide = 0;
+    const eventsTotalSlides = 8;
+
+    function initChapterThreeCarousel() {
+        const dotsContainer = document.getElementById('chapterThreeDots');
+        if (dotsContainer) {
+            for (let i = 0; i < chapterThreeTotalSlides; i++) {
+                const dot = document.createElement('span');
+                dot.className = 'carousel-dot';
+                if (i === 0) dot.classList.add('active');
+                dot.onclick = () => goToChapterThreeSlide(i);
+                dotsContainer.appendChild(dot);
+            }
+        }
+    }
+
+    function moveChapterThreeCarousel(direction) {
+        playClickSound();
+        chapterThreeSlide += direction;
+        
+        if (chapterThreeSlide < 0) {
+            chapterThreeSlide = chapterThreeTotalSlides - 1;
+        } else if (chapterThreeSlide >= chapterThreeTotalSlides) {
+            chapterThreeSlide = 0;
+        }
+        
+        updateChapterThreeCarousel();
+    }
+
+    function goToChapterThreeSlide(index) {
+        playClickSound();
+        chapterThreeSlide = index;
+        updateChapterThreeCarousel();
+    }
+
+    function updateChapterThreeCarousel() {
+        const carousel = document.getElementById('chapterThreeCarousel');
+        if (carousel) {
+            carousel.style.transform = `translateX(-${chapterThreeSlide * 100}%)`;
+            
+            const dots = document.querySelectorAll('#chapterThreeDots .carousel-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === chapterThreeSlide);
+            });
+        }
+    }
+
+    function initEventsCarousel() {
+        const dotsContainer = document.getElementById('eventsDots');
+        if (dotsContainer) {
+            for (let i = 0; i < eventsTotalSlides; i++) {
+                const dot = document.createElement('span');
+                dot.className = 'carousel-dot';
+                if (i === 0) dot.classList.add('active');
+                dot.onclick = () => goToEventsSlide(i);
+                dotsContainer.appendChild(dot);
+            }
+        }
+    }
+
+    function moveEventsCarousel(direction) {
+        playClickSound();
+        eventsSlide += direction;
+        
+        if (eventsSlide < 0) {
+            eventsSlide = eventsTotalSlides - 1;
+        } else if (eventsSlide >= eventsTotalSlides) {
+            eventsSlide = 0;
+        }
+        
+        updateEventsCarousel();
+    }
+
+    function goToEventsSlide(index) {
+        playClickSound();
+        eventsSlide = index;
+        updateEventsCarousel();
+    }
+
+    function updateEventsCarousel() {
+        const carousel = document.getElementById('eventsCarousel');
+        if (carousel) {
+            carousel.style.transform = `translateX(-${eventsSlide * 100}%)`;
+            
+            const dots = document.querySelectorAll('#eventsDots .carousel-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === eventsSlide);
+            });
+        }
+    }
+
+    function initCarousel() {
+        // Create dots
+        const dotsContainer = document.getElementById('carouselDots');
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('span');
+            dot.className = 'carousel-dot';
+            if (i === 0) dot.classList.add('active');
+            dot.onclick = () => goToSlide(i);
+            dotsContainer.appendChild(dot);
+        }
+        
+        // Start auto-slide
+        startAutoSlide();
+    }
+
+    function moveCarousel(direction) {
+        playClickSound();
+        currentSlide += direction;
+        
+        if (currentSlide < 0) {
+            currentSlide = totalSlides - 1;
+        } else if (currentSlide >= totalSlides) {
+            currentSlide = 0;
+        }
+        
+        updateCarousel();
+        resetAutoSlide();
+    }
+
+    function goToSlide(index) {
+        playClickSound();
+        currentSlide = index;
+        updateCarousel();
+        resetAutoSlide();
+    }
+
+    function updateCarousel() {
+        const carousel = document.getElementById('anterosCarousel');
+        carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+        
+        // Update dots
+        const dots = document.querySelectorAll('.carousel-dot');
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSlide);
+        });
+    }
+
+    function startAutoSlide() {
+        autoSlideInterval = setInterval(() => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        }, 4000); // Change slide every 4 seconds
+    }
+
+    function resetAutoSlide() {
+        clearInterval(autoSlideInterval);
+        startAutoSlide();
+    }
+
+    // Initialize carousel when page loads
+    window.addEventListener('load', initCarousel);
+</script>
+```
+
+</body>
+</html>
